@@ -11,7 +11,7 @@ const NavLink = ({ href, children, className = "" }) => {
         <Link className={`no-underline transition-all duration-200
                 ${isActive
                 ? "text-sky-400 scale-105"
-                : "text-black hover:text-sky-400"} 
+                : "hover:text-sky-400"} 
                 ${className}`} href={href}>{children}</Link>
     );
 };

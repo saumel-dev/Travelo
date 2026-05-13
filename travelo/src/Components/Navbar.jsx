@@ -1,12 +1,11 @@
 'use client'
-import { Link, Button } from "@heroui/react";
 import { useState } from "react";
 import NavLink from "./NavLink";
-
+import { ThemeSwitch } from "./ThemeSwitch";
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
-        <nav className="sticky top-0 z-40 w-full backdrop-blur-lg shadow-sm/5">
+        <nav className="w-full shadow-sm/5">
             <header className="flex h-16 items-center justify-between px-6">
                 <div className="flex items-start gap-4">
                     <button
@@ -49,6 +48,7 @@ const Navbar = () => {
                     <li><NavLink href="/profile" className="text-[15px]">Profile</NavLink></li>
                     <li><NavLink href="/login" className="text-[15px]">Login</NavLink></li>
                     <li><NavLink href="/signup" className="text-[15px]">Sign Up</NavLink></li>
+                <ThemeSwitch></ThemeSwitch>
                 </ul>
             </header>
             {isMenuOpen && (
