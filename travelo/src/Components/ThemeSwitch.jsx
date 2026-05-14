@@ -1,11 +1,16 @@
 "use client";
 import { useTheme } from "next-themes";
-import { Check, Moon, Power, Sun } from "@gravity-ui/icons";
+import { Moon, Sun } from "@gravity-ui/icons";
 import { Switch } from "@heroui/react";
+import { useEffect, useState } from "react";
 
 export function ThemeSwitch() {
     const { theme, setTheme } = useTheme();
-
+    // const [mounted, setMounted] = useState(false);
+    // useEffect(() => setMounted(true), []);
+    // if (!mounted) {
+    //     return <div className="h-[25px] w-[42px] opacity-0" />;
+    // }
     return (
         <>
             <Switch onChange={() => setTheme(theme === "dark" ? "light" : "dark")}>
@@ -15,7 +20,7 @@ export function ThemeSwitch() {
                             className={`h-[25px] w-[42px] bg-blue-500 ${isSelected ? "bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.5)]" : ""}`}
                         >
                             <Switch.Thumb
-                                className={`size-[20px] bg-white shadow-sm ${isSelected ? "ms-[15   px] shadow-lg" : ""}`}
+                                className={`size-[20px] bg-white shadow-sm ${isSelected ? "ms-[15px] shadow-lg" : ""}`}
                             >
                                 <Switch.Icon>
                                     {isSelected ? (

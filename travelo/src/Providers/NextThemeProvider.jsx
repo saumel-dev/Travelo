@@ -2,7 +2,8 @@
 import { ThemeProvider } from "next-themes";
 const NextThemeProvider = ({ children }) => {
     return (
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider enableSystem={false} attribute="class"
+            defaultTheme="light">
             {children}
         </ThemeProvider>
     );

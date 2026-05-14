@@ -5,3 +5,7 @@
   --accent: oklch(0.7 0.25 260);
   --success: oklch(0.65 0.15 155);
 }
+
+body {
+  transition: background-color 0.5s ease-in-out, color 0.3s ease-in-out;
+}

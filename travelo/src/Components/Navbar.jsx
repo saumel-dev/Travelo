@@ -40,7 +40,7 @@ const Navbar = () => {
                     <ul className="hidden items-center gap-4 md:flex">
                         <li><NavLink href="/" className="text-[15px]">Home</NavLink></li>
                         <li><NavLink href="/destinations" className="text-[15px]">Destinations</NavLink></li>
-                        <li><NavLink href="/my-bookings" className="text-[15px]">My Bookings</NavLink></li>
+                        <li><NavLink href="/add-destinations" className="text-[15px]">Add Destination</NavLink></li>
                     </ul>
                 </div>
                 <div className="text-2xl font-bold text-sky-400">Travelo</div>
