@@ -2,8 +2,19 @@
 import { useState } from "react";
 import NavLink from "./NavLink";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { authClient } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
+import { redirect } from "next/navigation";
 const Navbar = () => {
+    const {
+        data: session
+    } = authClient.useSession();
+    const user = session?.user;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleSignOut = async () => {
+        await authClient.signOut();
+    }
     return (
         <nav className="w-full shadow-sm/5">
             <header className="flex h-16 items-center justify-between px-6">
@@ -41,14 +52,23 @@ const Navbar = () => {
                         <li><NavLink href="/" className="text-[15px]">Home</NavLink></li>
                         <li><NavLink href="/destinations" className="text-[15px]">Destinations</NavLink></li>
                         <li><NavLink href="/add-destinations" className="text-[15px]">Add Destination</NavLink></li>
+                        <li><NavLink href="/my-bookings" className="text-[15px]">My Bookings</NavLink></li>
                     </ul>
                 </div>
                 <div className="text-2xl font-bold text-sky-400">Travelo</div>
                 <ul className="items-center gap-4 flex">
                     <li><NavLink href="/profile" className="text-[15px]">Profile</NavLink></li>
-                    <li><NavLink href="/login" className="text-[15px]">Login</NavLink></li>
-                    <li><NavLink href="/signup" className="text-[15px]">Sign Up</NavLink></li>
-                <ThemeSwitch></ThemeSwitch>
+                    {
+                        user ? <div className="flex items-center gap-2">
+                            <h1>Welcome: {user.name}</h1>
+                            <Button onClick={handleSignOut} variant="danger">Logout</Button>
+                        </div>
+                            : <div className="flex gap-2">
+                                <li><NavLink href="/login" className="text-[15px]">Login</NavLink></li>
+                                <li><NavLink href="/signup" className="text-[15px]">Sign Up</NavLink></li>
+                            </div>
+                    }
+                    <ThemeSwitch></ThemeSwitch>
                 </ul>
             </header>
             {isMenuOpen && (

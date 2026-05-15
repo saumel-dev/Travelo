@@ -1,8 +1,9 @@
+import BookingCard from '@/Components/BookingCard';
 import DeleteCard from '@/Components/DeleteCard';
 import EditModal from '@/Components/EditModal';
 import { getDestination } from '@/lib/data';
 import { ArrowLeft, Check, LocationArrow } from '@gravity-ui/icons';
-import { Button } from '@heroui/react';
+import { Button, DateField, Label } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -46,24 +47,7 @@ const DestinationDetailsPage = async ({ params }) => {
                         <p>{description}</p>
                     </div>
                 </div>
-                <div className='w-90 card mt-5 bg-white rounded-xl'>
-                    <div className='flex flex-col justify-start'>
-                        <p>Starting From</p>
-                        <p>${price}</p>
-                        <p>Per Person</p>
-                    </div>
-                    <div>
-                        <p className='bg-slate-100 p-2 rounded-md'>{departureDate}</p>
-                    </div>
-                    <div>
-                        <Button className="w-full">Book Now</Button>
-                    </div>
-                    <div>
-                        <p className='flex gap-2 items-center'><Check className='text-green-500'></Check> Free cancellation up to 7 days</p>
-                        <p className='flex gap-2 items-center'><Check className='text-green-500'></Check>Travel insurance included</p>
-                        <p className='flex gap-2 items-center'><Check className='text-green-500'></Check>24/7 customer support</p>
-                    </div>
-                </div>
+                <BookingCard destination={destination}></BookingCard>
             </div>
         </div>
     );
