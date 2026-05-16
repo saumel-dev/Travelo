@@ -1,8 +1,16 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, DateField, Label } from '@heroui/react';
+import { useState } from 'react';
 
-const BookingCard = ({destination}) => {
+const BookingCard = ({ destination }) => {
+    const {data: session} = authClient.useSession();
+    const user = session?.user;
+    console.log(user);
+    const [departureDate, setDepartureDate] = useState(null);
+    console.log(new Date(departureDate));
+    const handle
     return (
         <div>
             <div className='w-90 card mt-5 bg-white rounded-xl'>
@@ -12,7 +20,7 @@ const BookingCard = ({destination}) => {
                     <p>Per Person</p>
                 </div>
                 <div>
-                    <DateField className="w-[256px]" name="date">
+                    <DateField onChange={setDepartureDate} className="w-[256px]" name="date">
                         <Label>Date</Label>
                         <DateField.Group>
                             <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
