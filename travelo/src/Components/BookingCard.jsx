@@ -2,15 +2,43 @@
 import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, DateField, Label } from '@heroui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BookingCard = ({ destination }) => {
-    const {data: session} = authClient.useSession();
+    const { data: session } = authClient.useSession();
     const user = session?.user;
-    console.log(user);
     const [departureDate, setDepartureDate] = useState(null);
-    console.log(new Date(departureDate));
-    const handle
+
+
+    const handleBooking = async () => {
+        if (!user) {
+            alert("Please log in to book a destination.");
+            return;
+        }
+        const bookingData = {
+            userId: user.id,
+            userImage: user.image,
+            userName: user.name,
+            destinationId: destination._id,
+            destinationName: destination.destinationName,
+            price: destination.price,
+            image: destination.imageUrl,
+            country: destination.country,
+            departureDate: new Date(departureDate)
+        }
+        // console.log(bookingData);
+
+        const res = await fetch(`http://localhost:5000/bookings`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+        })
+
+        const data = await res.json();
+
+    }
     return (
         <div>
             <div className='w-90 card mt-5 bg-white rounded-xl'>
@@ -28,7 +56,7 @@ const BookingCard = ({ destination }) => {
                     </DateField>
                 </div>
                 <div>
-                    <Button className="w-full">Book Now</Button>
+                    <Button onClick={handleBooking} isDisabled={!user} className={`w-full'}`}>{user ? 'Book Now' : "Login to Book"}</Button>
                 </div>
                 <div>
                     <p className='flex gap-2 items-center'><Check className='text-green-500'></Check> Free cancellation up to 7 days</p>
